@@ -6,7 +6,6 @@ import (
 )
 
 type Config struct {
-	Environment      string
 	ConnectionString string
 }
 
@@ -17,21 +16,19 @@ func getConfigValue(envName string, defaultValue string) string {
 	return defaultValue
 }
 
-func getConnectionString() (pqInfo string) {
+func getConnectionString() (connectionString string) {
 	postgresHost := os.Getenv("POSTGRES_HOST")
 	postgresPort := os.Getenv("POSTGRES_PORT")
 	postgresUser := os.Getenv("POSTGRES_USER")
 	postgresPassword := os.Getenv("POSTGRES_PASSWORD")
 	postgresDb := os.Getenv("POSTGRES_DB")
-	pqInfo = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+	connectionString = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		postgresHost, postgresPort, postgresUser, postgresPassword, postgresDb)
-	fmt.Println(pqInfo)
-	return pqInfo
+	return connectionString
 }
 func NewConfig() *Config {
 
 	return &Config{
-		Environment:      getConfigValue("ENV", "local"),
 		ConnectionString: getConnectionString(),
 	}
 }
