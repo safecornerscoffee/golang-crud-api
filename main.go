@@ -8,6 +8,7 @@ import (
 	"github.com/labstack/gommon/log"
 	"github.com/safecornerscoffee/echo-mvc/internal/config"
 	"github.com/safecornerscoffee/echo-mvc/internal/database"
+	"github.com/safecornerscoffee/echo-mvc/user"
 )
 
 func main() {
@@ -23,6 +24,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	user.RegisterRoutes(db, e)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
