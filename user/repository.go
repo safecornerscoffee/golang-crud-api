@@ -15,12 +15,12 @@ const (
 	insertUserSQL = `Insert Into users (id, name, email, password, role)
 		VALUES ($1, $2, $3, $4, $5) RETURNING id`
 	getUserSQL    = `SELECT id, name, email FROM users WHERE id=$1`
-	updateUserSQL = `UPDATE users SET name=$2, email=$3 WHERE id=$1`
+	updateUserSQL = `UPDATE users SET name=$2, email=$3, password=$4, role=$5 WHERE id=$1`
 	deleteUserSQL = `DELETE FROM users where id=$1`
 )
 
 func (u *UserRepository) updateUser(user User) (err error) {
-	_, err = u.db.Query(updateUserSQL, user.ID, user.Name, user.Email)
+	_, err = u.db.Query(updateUserSQL, user.ID, user.Name, user.Email, user.Password, user.Role)
 	return err
 }
 
