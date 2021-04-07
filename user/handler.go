@@ -36,27 +36,37 @@ func (u *userHandler) GetUser(c echo.Context) (err error) {
 	id := c.Param("id")
 	user, err := u.repository.Get(id)
 	if err != nil {
-		return c.JSON(http.StatusNotFound, "not found.")
+		return c.JSON(http.StatusNotFound, user)
 	}
 	return c.JSON(http.StatusOK, user)
 }
 
-func (u *userHandler) FetchUsers(c echo.Context) (err error) {
-	return c.String(http.StatusOK, "fetchUsers")
-}
-
 func (u *userHandler) UpdateUser(c echo.Context) (err error) {
-	return c.String(http.StatusOK, "updateUser")
+	user := User{}
+	err = c.Bind(&user)
+	user.ID = c.Param("id")
+	if err != nil {
+		return err
+	}
+	err = u.repository.Update(user)
+	if err != nil {
+		return err
+	}
+	return c.NoContent(http.StatusOK)
 }
 
 func (u *userHandler) DeleteUser(c echo.Context) (err error) {
-	return c.String(http.StatusOK, "deleteUser")
+	id := c.Param("id")
+	err = u.repository.Delete(id)
+	if err != nil {
+		return c.String(http.StatusBadRequest, "faield")
+	}
+	return c.String(http.StatusOK, "delete id: "+id)
 }
 
 func RegisterRoutes(db *sql.DB, e *echo.Echo) {
 	h := NewUserHandler(db)
 
-	e.GET("/users", h.FetchUsers)
 	e.GET("/users/:id", h.GetUser)
 	e.POST("/users", h.CreateUser)
 	e.DELETE("/users/:id", h.DeleteUser)
