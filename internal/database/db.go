@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/safecornerscoffee/echo-mvc/internal/config"
+	"github.com/safecornerscoffee/golang-crud-api/internal/config"
 
 	_ "github.com/lib/pq"
 )

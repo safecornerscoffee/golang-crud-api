@@ -1,4 +1,4 @@
-module github.com/safecornerscoffee/echo-mvc
+module github.com/safecornerscoffee/golang-crud-api
 
 go 1.15
 

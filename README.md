@@ -1,4 +1,4 @@
-# Golang CRUD Example
+# Golang CRUD API
 
 1. [x] Configure Infrastructure
 2. [ ] Entities

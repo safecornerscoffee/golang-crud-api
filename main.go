@@ -6,9 +6,9 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
-	"github.com/safecornerscoffee/echo-mvc/internal/config"
-	"github.com/safecornerscoffee/echo-mvc/internal/database"
-	"github.com/safecornerscoffee/echo-mvc/user"
+	"github.com/safecornerscoffee/golang-crud-api/internal/config"
+	"github.com/safecornerscoffee/golang-crud-api/internal/database"
+	"github.com/safecornerscoffee/golang-crud-api/user"
 )
 
 func main() {
